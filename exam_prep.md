@@ -80,8 +80,8 @@ SELINUX=enforcing
 
 ```bash
 [update]
-name=update
-baseurl=<http://server.example.com/repo>
+name = update
+baseurl = http://server.example.com/repo
 ```
 
 -   Test the repo configuration:
@@ -157,7 +157,7 @@ baseurl=<http://server.example.com/repo>
 # chmod g+s /dir_bersama/kelompok_siswa
 ```
 
--   Confirm the shared directory configuration:
+-   Verify the shared directory configuration:
 
 ```bash
 # ls -ld /dir_bersama/kelompok_siswa
@@ -170,4 +170,41 @@ baseurl=<http://server.example.com/repo>
 ```bash
 # systemctl enable graphical.target
 # systemctl start graphical.target
+```
+
+## Update Kernel
+
+-   Add the appropriate kernel repository
+
+```bash
+# vim /etc/yum.repos.d/REPO_NAME.repo
+```
+
+```bash
+[kernelrepo]
+name = kernel repository
+baseurl = http://server.example.com/kernel_repo
+```
+
+```bash
+# yum repolist
+```
+
+-   Check current kernel before update
+
+```bash
+# uname -rms
+```
+
+-   Update the kernel and reboot the system
+
+```bash
+# yum install kernel
+# reboot
+```
+
+-   Verify the update kernel
+
+```bash
+# uname -rms
 ```
