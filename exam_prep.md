@@ -56,24 +56,24 @@ rd.break selinux=0
 # ping example.com
 ```
 
-## Configure SELinux for Enforcing Mode
+## Configure SELinux for Enforcing or Permissive Mode
 
--   Open SELinux config file: 
+-   Set Enforcing Mode
 
 ```bash
-# vim /etc/selinux/config
+# setenforce enforcing
 ```
 
--   Enable this line:
+-   Set Permissive Mode
 
 ```bash
-SELINUX=enforcing
+# setenforce permissive
 ```
 
--   Reboot the system: 
+-   Verify Enforcing or Permissive Mode:
 
 ```bash
-# reboot
+# getenforce
 ```
 
 ## Configure Yum Repository
@@ -162,7 +162,7 @@ baseurl = http://server.example.com/repo
 # passwd karti
 ```
 
-## Create A Shared Directory
+## Create a Shared Directory
 
 -   Create a directory
 
