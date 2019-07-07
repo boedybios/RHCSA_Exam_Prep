@@ -287,3 +287,23 @@ server time.examplle.com
 ```bash
 # crontab -el tejo
 ```
+
+## Enable IP Forwarding
+
+-   Configure `sysctl.conf`:
+
+```bash
+# vim /etc/sysctl.conf
+```
+
+-   Add this line to the file:
+
+```bash
+net.ipv4.ip_forward = 1
+```
+
+-   Reload the configuration file:
+
+```bash
+# sysctl -p
+```
