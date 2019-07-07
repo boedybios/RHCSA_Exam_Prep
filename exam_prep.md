@@ -72,7 +72,7 @@ SELINUX=enforcing
 
 ## Configure Yum Repository
 
-- Need a help? Find `/Example:`
+-   Need a help? Find `/Example:`
 
 ```bash
 # man yum.conf
@@ -171,11 +171,12 @@ baseurl = http://server.example.com/repo
 
 ## Activate and Start a Service
 
--   Active and start GUI
+-   Active, start, and restart GUI service
 
 ```bash
 # systemctl enable graphical.target
 # systemctl start graphical.target
+# systemctl restart graphical.target
 ```
 
 ## Update Kernel
@@ -217,24 +218,27 @@ baseurl = http://server.example.com/kernel_repo
 
 ## Configure NTP
 
-- Configure `chrony.conf` file:
+-   Configure `chrony.conf` file:
+
 ```bash
 # vim /etc/chrony.conf 
 ```
 
-- Add this entry to the file:
+-   Add this entry to the file:
 
 ```bash
 server time.examplle.com
 ```
 
-- Enable and restart the service:
+-   Enable and restart the service:
 
 ```bash
 # systemctl enable chronyd
 # systemctl restart chronyd
 ```
-- Verify the NTP:
+
+-   Verify the NTP:
+
 ```bash
 # chronyc source -v
 ```
