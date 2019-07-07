@@ -171,7 +171,7 @@ baseurl = http://server.example.com/repo
 
 ## Activate and Start a Service
 
--   Active, start, and restart GUI service
+-   Enable, start, and restart GUI service
 
 ```bash
 # systemctl enable graphical.target
@@ -218,6 +218,12 @@ baseurl = http://server.example.com/kernel_repo
 
 ## Configure NTP
 
+-   Install chrony
+
+```bash
+# yum install chrony
+```
+
 -   Configure `chrony.conf` file:
 
 ```bash
@@ -230,11 +236,11 @@ baseurl = http://server.example.com/kernel_repo
 server time.examplle.com
 ```
 
--   Enable and restart the service:
+-   Enable and start the service:
 
 ```bash
 # systemctl enable chronyd
-# systemctl restart chronyd
+# systemctl start chronyd
 ```
 
 -   Verify the NTP:
@@ -242,3 +248,32 @@ server time.examplle.com
 ```bash
 # chronyc source -v
 ```
+
+## Schedule a Job for a User
+
+-   Register a job in crontab for user tejo
+
+```bash
+# crontab -eu tejo
+```
+
+```bash
+# min  hour  date  month  day  command
+  15    10    *      *     *   /bin/date >> /home/tejo/catatan_harian.txt
+```
+
+-   Enable and restart the service:
+
+```bash
+# systemctl enable crond
+# systemctl start crond
+```
+
+-   Verify cron job for user tejo:
+
+````bash
+# crontab -el tejo
+```
+````
+
+````
