@@ -1,6 +1,6 @@
 # RHCSA Exam Preparation
 
-## Reset Root Password
+## Reset Root Password -> Super Important
 
 -   Reboot the system
 -   Enter Grub Edit menu by pressing `e`
@@ -85,8 +85,8 @@ SELINUX=enforcing
 ```
 
 ```bash
-[update]
-name = update
+[myrepoid]
+name = Name of this repo
 baseurl = http://server.example.com/repo
 ```
 
@@ -213,4 +213,28 @@ baseurl = http://server.example.com/kernel_repo
 
 ```bash
 # uname -rms
+```
+
+## Configure NTP
+
+- Configure `chrony.conf` file:
+```bash
+# vim /etc/chrony.conf 
+```
+
+- Add this entry to the file:
+
+```bash
+server time.examplle.com
+```
+
+- Enable and restart the service:
+
+```bash
+# systemctl enable chronyd
+# systemctl restart chronyd
+```
+- Verify the NTP:
+```bash
+# chronyc source -v
 ```
