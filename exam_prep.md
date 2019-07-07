@@ -47,7 +47,7 @@ rd.break selinux=0
 -   Test the connection using `ping`
 
 ```bash
-# ping examplle.com
+# ping example.com
 ```
 
 ## Configure SELinux for Enforcing Mode
@@ -71,6 +71,12 @@ SELINUX=enforcing
 ```
 
 ## Configure Yum Repository
+
+- Need a help? Find `/Example:`
+
+```bash
+# man yum.conf
+```
 
 -   Create and open a config file: 
 
