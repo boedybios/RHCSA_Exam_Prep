@@ -30,6 +30,12 @@ rd.break selinux=0
 # passwd
 ```
 
+-   Autorelabel
+
+```bash
+# touch /.autorelabel
+```
+
 -   Exit the shell and reboot: 
 
 ```bash
