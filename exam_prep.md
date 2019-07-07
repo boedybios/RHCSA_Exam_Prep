@@ -106,12 +106,24 @@ baseurl = http://server.example.com/repo
 # groupadd siswa
 ```
 
--   Create users: `tejo`, `bejo`, `wati`:
+-   Verify the group (pay attention on its group id)
+
+```bash
+# tail /etc/group
+```
+
+-   Create users: `tejo`, `bejo`, `karti`:
 
 ```bash
 # useradd tejo
 # useradd bejo
 # useradd karti
+```
+
+-   Create `wati` with userid 2992
+
+```bash
+# useradd -u 2992 wati 
 ```
 
 -   Include user `tejo` and `bejo` to `siswa` as their secondary group:
@@ -121,11 +133,12 @@ baseurl = http://server.example.com/repo
 # usermod -aG siswa bejo
 ```
 
--   Verify their groups:
+-   Verify users (pay attention on username, uid, and group):
 
 ```bash
 # id tejo
 # id bejo
+# id wati
 ```
 
 -   Prevent user `karti` from login into shell:
@@ -271,9 +284,6 @@ server time.examplle.com
 
 -   Verify cron job for user tejo:
 
-````bash
+```bash
 # crontab -el tejo
 ```
-````
-
-````
