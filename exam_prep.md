@@ -50,6 +50,12 @@ rd.break selinux=0
 # nmtui
 ```
 
+-   Restart network service
+
+```bash
+# systemctl restart network
+```
+
 -   Test the connection using `ping`
 
 ```bash
@@ -312,4 +318,66 @@ net.ipv4.ip_forward = 1
 
 ```bash
 # sysctl -p
+```
+
+## Create a New Physical Partition
+
+-   List the partition table
+
+```bash
+# fdisk -l
+```
+
+-   Create a new partition of `/dev/sdb`(important menu `m`,`p`,`n`,`w`):
+
+```bash
+# fdisk /dev/sdb
+```
+
+-   Verify the new partition:
+
+```bash
+# fdisk -l
+```
+
+-   Format the new partition using ext4:
+
+```bash
+# mkfs.ext4 /dev/sdb1
+```
+
+-   Create a directory for mounting point
+
+```bash
+# mkdir -p /my_mount
+```
+
+-   Get the UUID for the new partition
+
+```bash
+# blkid
+```
+
+-   Register the UUID into the fstab
+
+```bash
+# vim /etc/fstab
+```
+
+-   Add this line:
+
+```bash
+UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
+```
+
+-   Mount the new partition
+
+```bash
+# mount -a
+```
+
+-   Verify the mount point
+
+```bash
+# df -hT
 ```
