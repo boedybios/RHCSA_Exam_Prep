@@ -334,6 +334,12 @@ net.ipv4.ip_forward = 1
 # fdisk /dev/sdb
 ```
 
+-   Inform the OS of partition table changes
+
+```bash
+# partprobe
+```
+
 -   Verify the new partition:
 
 ```bash
