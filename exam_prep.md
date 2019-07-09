@@ -65,15 +65,20 @@ rd.break
 
 ## Configure Systemd Boot Target
 
--  Configure systemd boot target to `multi-user`
+-   Configure systemd boot target to `multi-user`
+
 ```bash
 # systemctl set-default multi-user.target
 ```
--  Configure systemd boot target to `graphical`
+
+-   Configure systemd boot target to `graphical`
+
 ```bash
 # systemctl set-default graphical.target
 ```
-- Verify systemd boot target:
+
+-   Verify systemd boot target:
+
 ```bash
 # systemctl get-default
 ```
@@ -405,4 +410,3 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 ```
 
 ## Create a Swap Partition
-
