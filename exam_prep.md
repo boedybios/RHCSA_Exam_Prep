@@ -215,6 +215,12 @@ enabled = 1
 # id wati
 ```
 
+-   Shit things happen in life, but don't worry; we can always remove a user from a group:
+
+```bash
+# gpasswd -d <user> <group>
+```
+
 -   Prevent user `karti` from login into shell:
 
 ```bash
