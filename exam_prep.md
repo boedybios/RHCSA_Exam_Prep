@@ -253,7 +253,7 @@ enabled = 1
 -   The shared directory should be readable, writable, and accessible to the member of `siswa` only:
 
 ```bash
-# chmod g+s /dir_bersama/kelompok_siswa
+# chmod 770 /dir_bersama/kelompok_siswa
 ```
 
 -   Verify the shared directory configuration:
