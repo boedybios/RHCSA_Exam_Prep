@@ -124,7 +124,7 @@ baseurl = http://server.example.com/repo
 gpgcheck = 0
 ```
 
--   Test the repo configuration:
+-   Verify the repo configuration:
 
 ```bash
 # yum clean all
@@ -134,7 +134,7 @@ gpgcheck = 0
 
 ## Update Kernel
 
-- Add the appropriate kernel repository
+-   Add the appropriate kernel repository
 
 ```bash
 # vim /etc/yum.repos.d/REPO_NAME.repo
@@ -151,20 +151,20 @@ gpgcheck = 0
 # yum repolist
 ```
 
-- Check current kernel before update
+-   Check current kernel before update
 
 ```bash
 # uname -rms
 ```
 
-- Update the kernel and reboot the system
+-   Update the kernel and reboot the system
 
 ```bash
 # yum install kernel
 # reboot
 ```
 
-- Verify the update kernel
+-   Verify the update kernel
 
 ```bash
 # uname -rms
