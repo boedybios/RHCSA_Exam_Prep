@@ -302,7 +302,7 @@ server time.examplle.com
 -   Verify the NTP:
 
 ```bash
-# chronyc source -v
+# chronyc sources -V
 ```
 
 ## Schedule a Job for a User
