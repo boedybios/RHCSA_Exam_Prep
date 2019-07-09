@@ -443,6 +443,72 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 # df -hT
 ```
 
-## Create a Swap Partition
+## Create a New Swap Partition
 
--   // todo
+-   Show the state of current swap partition (in mega bytes)
+
+```bash
+# free --mega
+```
+
+-   List the partition table
+
+```bash
+# fdisk -l
+```
+
+-   Create a new partition of `/dev/sdb`(important menu `m`,`p`,`n`,`l`,`t`,`w`) make to change the type to swap (`82`):
+
+```bash
+# fdisk /dev/sdb
+```
+
+-   Inform the OS of partition table changes
+
+```bash
+# partprobe
+```
+
+-   Verify the new partition:
+
+```bash
+# fdisk -l
+```
+
+-   Format the new partition as swap:
+
+```bash
+# mkswap /dev/sdb2
+```
+
+-   Activate the new swap partition:
+
+```bash
+# swapon /dev/sdb2
+# swapon -a
+```
+
+-   Get the UUID for the new partition
+
+```bash
+# blkid
+```
+
+-   Register the UUID into the fstab
+
+```bash
+# vim /etc/fstab
+```
+
+-   Add this line:
+
+```bash
+UUID=<uuid_for_sdb2> swap swap defaults 0 0
+```
+
+-   Verify the new swap partition:
+
+```bash
+# swapon -s
+# free --mega
+```
