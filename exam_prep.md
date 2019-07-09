@@ -8,7 +8,7 @@
 -   In the end of the line, add this: 
 
 ```bash
-rd.break selinux=0
+rd.break
 ```
 
 -   Press `Ctrl+X` to start the boot process 
@@ -36,10 +36,11 @@ rd.break selinux=0
 # touch /.autorelabel
 ```
 
--   Exit the shell and reboot: 
+-   Exit twice to reboot: 
 
 ```bash
-# reboot
+# exit
+# exit
 ```
 
 ## Configure Network and Hostname
@@ -60,6 +61,21 @@ rd.break selinux=0
 
 ```bash
 # ping example.com
+```
+
+## Configure Systemd Boot Target
+
+-  Configure systemd boot target to `multi-user`
+```bash
+# systemctl set-default multi-user.target
+```
+-  Configure systemd boot target to `graphical`
+```bash
+# systemctl set-default graphical.target
+```
+- Verify systemd boot target:
+```bash
+# systemctl get-default
 ```
 
 ## Configure SELinux for Enforcing or Permissive Mode
@@ -387,3 +403,6 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 ```bash
 # df -hT
 ```
+
+## Create a Swap Partition
+
