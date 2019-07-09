@@ -122,6 +122,7 @@ rd.break
 name = Name of this repo
 baseurl = http://server.example.com/repo
 gpgcheck = 0
+enabled = 1
 ```
 
 -   Verify the repo configuration:
@@ -145,6 +146,7 @@ gpgcheck = 0
 name = kernel repository
 baseurl = http://server.example.com/kernel_repo
 gpgcheck = 0
+enabled = 1
 ```
 
 ```bash
