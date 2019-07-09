@@ -343,7 +343,7 @@ net.ipv4.ip_forward = 1
 
 ## Configure File Access Control List (FACL)
 
-- Backup `fstab` and use it as an example
+-   Backup `fstab` and use it as an example
 
 ```bash
 # mkdir -p /root/backup/
@@ -351,21 +351,25 @@ net.ipv4.ip_forward = 1
 # ls -l /root/backup/
 ```
 
-- User `tejo` can read and write the file:
+-   User `tejo` can read and write the file:
 
 ```bash
 # setfacl -m u:tejo:rw- /root/backup/fstab
 ```
--  User `bejo` cannot read or write the file:
+
+-   User `bejo` cannot read or write the file:
+
 ```bash
 # setfacl -m u:bejo:--- /root/backup/fstab
 ```
-- Other users can only read the file:
+
+-   Other users can only read the file:
+
 ```bash
-# chmod 755 /root/backup/fstab
+# chmod 744 /root/backup/fstab
 ```
 
-- Verify ACL of the file:
+-   Verify ACL of the file:
 
 ```bash
 # getfacl /root/backup/fstab
@@ -441,4 +445,4 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 
 ## Create a Swap Partition
 
-- // todo
+-   // todo
