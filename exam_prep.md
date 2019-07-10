@@ -393,6 +393,26 @@ net.ipv4.ip_forward = 1
 # tar -cvzf /root/usr.local.tgz /usr/local
 ```
 
+-   Verify:
+
+```bash
+# ls -l /root
+```
+
+## Extract a Line from a File with String Matching
+
+-   Extract a live in `/etc/passwd` contains `karti` and stores it in a file `/root/user.karti.txt`
+
+```bash
+# cat /etc/passwd | grep karti > /root/user.karti.txt
+```
+
+-   Verify:
+
+```bash
+# ls -l /root
+```
+
 ## Create a New Physical Partition
 
 -   List the partition table
