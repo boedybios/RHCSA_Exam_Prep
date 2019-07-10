@@ -1,2 +1,3 @@
-# RHCSA_Exam_Prep
-Preparation for RHCSA Exam
+# RHCSA Exam Preparation
+
+This is my personal note to prepare myself for RHCSA Exam
