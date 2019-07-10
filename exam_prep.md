@@ -289,7 +289,7 @@ enabled = 1
 -   Add this entry to the file:
 
 ```bash
-server time.examplle.com
+server time.example.com
 ```
 
 -   Enable and start the service:
@@ -383,6 +383,14 @@ net.ipv4.ip_forward = 1
 
 ```bash
 # getfacl /root/backup/fstab
+```
+
+## Create a Backup Archive File:
+
+-   Create an archive file named `usr.local.tgz` in root home directory as a backup for `/usr/local/`
+
+```bash
+# tar -cvzf /root/usr.local.tgz /usr/local
 ```
 
 ## Create a New Physical Partition
