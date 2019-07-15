@@ -413,6 +413,20 @@ net.ipv4.ip_forward = 1
 # ls -l /root
 ```
 
+## SSH
+
+-   Create ssh key:
+
+```bash
+# ssh-keygen
+```
+
+-   copy ssh key
+
+```bash
+# ssh-copy-id user@server
+```
+
 ## Create a New Physical Partition
 
 -   List the partition table
