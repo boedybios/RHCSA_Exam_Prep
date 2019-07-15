@@ -427,6 +427,16 @@ net.ipv4.ip_forward = 1
 # ssh-copy-id user@server
 ```
 
+## Start cockpit service
+
+-   Starting a cockpit service
+
+```bash
+# system start cockpit.service
+```
+
+-   Open web browser and access the <http://servername:9090>
+
 ## Create a New Physical Partition
 
 -   List the partition table
