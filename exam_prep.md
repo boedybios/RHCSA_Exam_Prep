@@ -97,6 +97,16 @@ rd.break
 # setenforce permissive
 ```
 
+-   To make it permanent, make sure to configure the SELinux config file
+
+```bash
+# vim /etc/selinux/config 
+```
+
+```bash
+SELINUX = enforcing
+```
+
 -   Verify Enforcing or Permissive Mode:
 
 ```bash
@@ -253,13 +263,28 @@ enabled = 1
 -   The shared directory should be readable, writable, and accessible to the member of `siswa` only:
 
 ```bash
-# chmod 770 /dir_bersama/kelompok_siswa
+# chmod 2770 /dir_bersama/kelompok_siswa
 ```
 
+-   Pay attention on sticky bit, sgid, and suid
 -   Verify the shared directory configuration:
 
 ```bash
 # ls -ld /dir_bersama/kelompok_siswa
+```
+
+## SSH
+
+-   Create ssh key:
+
+```bash
+# ssh-keygen
+```
+
+-   copy ssh key
+
+```bash
+# ssh-copy-id user@server
 ```
 
 ## Activate and Start a Service
@@ -413,21 +438,7 @@ net.ipv4.ip_forward = 1
 # ls -l /root
 ```
 
-## SSH
-
--   Create ssh key:
-
-```bash
-# ssh-keygen
-```
-
--   copy ssh key
-
-```bash
-# ssh-copy-id user@server
-```
-
-## Start cockpit service
+## Start Cockpit Service
 
 -   Starting a cockpit service
 
