@@ -460,24 +460,13 @@ net.ipv4.ip_forward = 1
 
 ```bash
 # fdisk -l
+# lsblk -l
 ```
 
--   Create a new partition of `/dev/sdb`(important menu `m`,`p`,`n`,`w`):
+-   Create a new partition of `/dev/sdb` with the size of 1GB
 
 ```bash
-# fdisk /dev/sdb
-```
-
--   Inform the OS of partition table changes
-
-```bash
-# partprobe
-```
-
--   Alternatively we can use `parted`:
-
-```bash
-# parted /dev/sdb mkpart primary ext4 20482 100MB
+# parted /dev/sdb mkpart primary ext4 2048s 1001MB
 ```
 
 -   Verify the new partition:
@@ -485,6 +474,13 @@ net.ipv4.ip_forward = 1
 ```bash
 # fdisk -l
 # lsblk
+# parted /dev/sdb print
+```
+
+-   Register the new partition:
+
+```bash
+# udevadm settle
 ```
 
 -   Format the new partition using ext4:
@@ -503,6 +499,7 @@ net.ipv4.ip_forward = 1
 
 ```bash
 # blkid
+# lsblk --fs /dev/sdb
 ```
 
 -   Register the UUID into the fstab
@@ -517,10 +514,10 @@ net.ipv4.ip_forward = 1
 UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 ```
 
--   Mount the new partition
+-   Update `systemd` for the system to register the new `/etc/fstab` configuration:
 
 ```bash
-# mount -a
+# systemctl daemon-reload
 ```
 
 -   Verify the mount point
