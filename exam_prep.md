@@ -135,10 +135,10 @@ gpgcheck = 0
 enabled = 1
 ```
 
-- Alternatively we can use `yum-config-manager`:
+-   Alternatively we can use `yum-config-manager`:
 
 ```bash
-# yum-config-manager --add-repo=http://server.example.com.repo
+# yum-config-manager --add-repo "http://server.example.com.repo"
 ```
 
 -   Verify the repo configuration:
