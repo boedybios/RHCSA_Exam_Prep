@@ -474,10 +474,17 @@ net.ipv4.ip_forward = 1
 # partprobe
 ```
 
+-   Alternatively we can use `parted`:
+
+```bash
+# parted /dev/sdb mkpart primary ext4 20482 100MB
+```
+
 -   Verify the new partition:
 
 ```bash
 # fdisk -l
+# lsblk
 ```
 
 -   Format the new partition using ext4:
