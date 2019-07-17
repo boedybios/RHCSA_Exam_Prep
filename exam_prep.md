@@ -113,7 +113,7 @@ SELINUX = enforcing
 # getenforce
 ```
 
-## Configure Yum Repository
+## Configure Yum Repository and Software Installation
 
 -   Need a help? Find `/Example:`
 
@@ -141,12 +141,37 @@ enabled = 1
 # yum-config-manager --add-repo "http://server.example.com.repo"
 ```
 
--   Verify the repo configuration:
+-   Verify the repository configuration:
 
 ```bash
 # yum clean all
 # yum list all
 # yum repolist
+```
+
+-   Install `cups` from a repository:
+
+```bash
+# yum install cups
+```
+
+-   Install `httpd 2.4` from a repository with a `common` stream module:
+
+```bash
+# yum module list
+# yum module install httpd:2.4/common
+```
+
+-   Install package from rpm file:
+
+```bash
+# yum localinstall file.rpm
+```
+
+-   Remove/uninstall `cups` from the system:
+
+```bash
+# yum remove cups
 ```
 
 ## Update Kernel
@@ -178,7 +203,7 @@ enabled = 1
 -   Update the kernel and reboot the system
 
 ```bash
-# yum install kernel
+# yum update kernel
 # reboot
 ```
 
@@ -272,7 +297,6 @@ enabled = 1
 # chmod 2770 /dir_bersama/kelompok_siswa
 ```
 
--   Pay attention on sticky bit, sgid, and suid
 -   Verify the shared directory configuration:
 
 ```bash
