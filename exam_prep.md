@@ -483,8 +483,13 @@ net.ipv4.ip_forward = 1
 -   List the partition table
 
 ```bash
-# fdisk -l
-# lsblk -l
+# lsblk -fp
+```
+
+-   Create label `msdos` for `/dev/sdb`:
+
+```bash
+# parted /dev/sdb mklabel msdos
 ```
 
 -   Create a new partition of `/dev/sdb` with the size of 1GB
@@ -496,8 +501,7 @@ net.ipv4.ip_forward = 1
 -   Verify the new partition:
 
 ```bash
-# fdisk -l
-# lsblk
+# lsblk -fp
 # parted /dev/sdb print
 ```
 
@@ -522,8 +526,7 @@ net.ipv4.ip_forward = 1
 -   Get the UUID for the new partition
 
 ```bash
-# blkid
-# lsblk --fs /dev/sdb
+# lsblk -fp
 ```
 
 -   Register the UUID into the fstab
@@ -542,6 +545,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 
 ```bash
 # systemctl daemon-reload
+# umount -a
 ```
 
 -   Verify the mount point
