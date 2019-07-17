@@ -486,16 +486,16 @@ net.ipv4.ip_forward = 1
 # lsblk -fp
 ```
 
--   Create label `msdos` for `/dev/sdb`:
+-   Create partition label (`msdos` or `gpt`) on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write changes using `w`]&#x3A;
 
 ```bash
-# parted /dev/sdb mklabel msdos
+# fdsik /dev/sdb
 ```
 
--   Create a new partition of `/dev/sdb` with the size of 1GB
+-   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write changes using `w`]
 
 ```bash
-# parted /dev/sdb mkpart primary ext4 2048s 1001MB
+# fdisk /dev/sdb
 ```
 
 -   Verify the new partition:
@@ -541,6 +541,12 @@ net.ipv4.ip_forward = 1
 UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 ```
 
+-   Alternatively we can use device name
+
+```bash
+/dev/sdb1 /my_mount ext4 defaults 0 0
+```
+
 -   Update `systemd` for the system to register the new `/etc/fstab` configuration:
 
 ```bash
@@ -551,7 +557,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 -   Verify the mount point
 
 ```bash
-# df -hT
+# lsblk -fp
 ```
 
 ## Create a New Swap Partition
@@ -559,31 +565,31 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 -   Show the state of current swap partition (in mega bytes)
 
 ```bash
-# free --mega
+# free -m
 ```
 
 -   List the partition table
 
 ```bash
-# fdisk -l
+# lsblk -fp
 ```
 
--   Create a new partition of `/dev/sdb`(important menu `m`,`p`,`n`,`l`,`t`,`w`) make to change the type to swap (`82`):
+-   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to adjust the type to linux-swap using `t` and also to write changes using `w`]
 
 ```bash
 # fdisk /dev/sdb
 ```
 
--   Inform the OS of partition table changes
+-   Register the new partition:
 
 ```bash
-# partprobe
+# udevadm settle
 ```
 
 -   Verify the new partition:
 
 ```bash
-# fdisk -l
+# lsblk -fp
 ```
 
 -   Format the new partition as swap:
@@ -602,7 +608,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 -   Get the UUID for the new partition
 
 ```bash
-# blkid
+# lsblk -fp
 ```
 
 -   Register the UUID into the fstab
@@ -617,9 +623,15 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 UUID=<uuid_for_sdb2> swap swap defaults 0 0
 ```
 
+-   Alternatively we can use device name
+
+```bash
+/dev/sdb2 swap swap defaults 0 0
+```
+
 -   Verify the new swap partition:
 
 ```bash
-# swapon -s
-# free --mega
+# swapon /dev/sdb2
+# free -m
 ```
