@@ -12,13 +12,13 @@ rd.break
 ```
 
 -   Press `Ctrl+X` to start the boot process 
--   Remount the `sysroot` file system: 
+-   Remount the `sysroot` file system with read and write permission: 
 
 ```bash
 # mount -o remount,rw /sysroot
 ```
 
--   Enter `sysroot` as `root`: 
+-   Configure `/sysroot` as `/`: 
 
 ```bash
 # chroot /sysroot
@@ -30,7 +30,7 @@ rd.break
 # passwd
 ```
 
--   Autorelabel
+-   Ask SELinux to relabel the entire SELinux label:
 
 ```bash
 # touch /.autorelabel
