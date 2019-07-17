@@ -344,7 +344,7 @@ enabled = 1
 -   Add this entry to the file:
 
 ```bash
-server time.example.com
+server time.example.com iburst
 ```
 
 -   Enable and start the service:
@@ -354,10 +354,17 @@ server time.example.com
 # systemctl start chronyd
 ```
 
+-   Turn on the time syncronisation:
+
+```bash
+# timedatectl set-ntp yes
+```
+
 -   Verify the NTP:
 
 ```bash
-# chronyc sources -V
+# chronyc sources -v
+# timedatectl
 ```
 
 ## Schedule a Job for a User
@@ -486,13 +493,13 @@ net.ipv4.ip_forward = 1
 # lsblk -fp
 ```
 
--   Create partition label (`msdos` or `gpt`) on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write changes using `w`]&#x3A;
+-   Create partition label (`msdos` or `gpt`) on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write the changes using `w`]&#x3A;
 
 ```bash
 # fdsik /dev/sdb
 ```
 
--   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write changes using `w`]
+-   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write the changes using `w`]
 
 ```bash
 # fdisk /dev/sdb
@@ -551,7 +558,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 
 ```bash
 # systemctl daemon-reload
-# umount -a
+# mount -a
 ```
 
 -   Verify the mount point
@@ -574,7 +581,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 # lsblk -fp
 ```
 
--   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to adjust the type to linux-swap using `t` and also to write changes using `w`]
+-   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to adjust the partition type to `linux-swap` using `t` and also to write the changes using `w`]
 
 ```bash
 # fdisk /dev/sdb
@@ -623,7 +630,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 UUID=<uuid_for_sdb2> swap swap defaults 0 0
 ```
 
--   Alternatively we can use device name
+-   Or alternatively we can use device name
 
 ```bash
 /dev/sdb2 swap swap defaults 0 0
@@ -632,6 +639,5 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Verify the new swap partition:
 
 ```bash
-# swapon /dev/sdb2
 # free -m
 ```
