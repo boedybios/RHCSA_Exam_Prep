@@ -675,7 +675,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # udevadm settle
 ```
 
--   Include the two newly (`/dev/sdc1` and `/dev/sdc2`) created partitions as PV (Physical Volume):
+-   Include the two newly created partitions (`/dev/sdc1` and `/dev/sdc2`) as PV (Physical Volume):
 
 ```bash
 # pvcreate /dev/sdc1 /dev/sdc2
@@ -740,5 +740,69 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ```bash
 # lsblk -fp
+# df -h /logical_storage
+```
+
+## Extending Logical Volumes
+
+- Create a new physical partition from `/dev/sdc` with the size of 500MB. We can do it using `fdisk` but make sure to adjust the type to Linux LVM using `t` [always verify using `p` before writing it using `w`]:
+
+```bash
+# fdisk /dev/sdc
+```
+
+-   Verify the partitions:
+
+```bash
+# lsblk -fp
+# parted /dev/sdc print
+```
+
+-   Register the new partition:
+
+```bash
+# udevadm settle
+```
+
+- Include the newly created partitions (`/dev/sdc3`)  as PV (Physical Volume):
+
+```bash
+# pvcreate /dev/sdc3
+```
+
+-   Verify the PV:
+
+```bash
+# pvdisplay
+```
+
+- Extend the VG (`/dev/vg01`) using the new PV (`/dev/sdc3`):
+
+```bash
+# vgextend /dev/vg01 /dev/sdc3
+```
+
+- Verify the VG:
+```bash
+# vgdisplay
+```
+
+- Extend the LV (`/dev/vg01/lv01`) to 1.1G:
+```bash
+# lvextend -L 1.1G /dev/vg01/lv01
+```
+
+- Verify the LV:
+```bash
+# lvdisplay
+```
+- Extend the XFS file system:
+```bash
+# xfs_growfs /logical_storage
+```
+
+- Verify the usable mount space:
+
+```bash
 # df -h /logical_storage
 ```
