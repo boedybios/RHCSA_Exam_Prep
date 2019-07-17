@@ -63,15 +63,15 @@ rd.break
 # ping example.com
 ```
 
-## Configure Systemd Boot Target
+## Configure Default Systemd Boot Target
 
--   Configure systemd boot target to `multi-user`
+-   Configure default systemd boot target to `multi-user`
 
 ```bash
 # systemctl set-default multi-user.target
 ```
 
--   Configure systemd boot target to `graphical`
+-   Configure default systemd boot target to `graphical`
 
 ```bash
 # systemctl set-default graphical.target
@@ -85,13 +85,13 @@ rd.break
 
 ## Configure SELinux for Enforcing or Permissive Mode
 
--   Set Enforcing Mode
+-   Set SELinux mode to Enforcing:
 
 ```bash
 # setenforce enforcing
 ```
 
--   Set Permissive Mode
+-   Set SELinux mode to Permissive:
 
 ```bash
 # setenforce permissive
@@ -107,7 +107,7 @@ rd.break
 SELINUX = enforcing
 ```
 
--   Verify Enforcing or Permissive Mode:
+-   Verify the SELinux Mode:
 
 ```bash
 # getenforce
@@ -162,7 +162,7 @@ enabled = 1
 # yum module install httpd:2.4/common
 ```
 
--   Install package from rpm file:
+-   Install a package from rpm file:
 
 ```bash
 # yum localinstall file.rpm
@@ -373,7 +373,7 @@ server time.example.com
   15    10    *      *     *   /bin/date >> /home/tejo/catatan_harian.txt
 ```
 
--   Enable and restart the service:
+-   Enable and start the service:
 
 ```bash
 # systemctl enable crond
