@@ -45,16 +45,22 @@ rd.break
 
 ## Configure Network and Hostname
 
--   For interactive way to configure both network and hostname is using `nmtui`
+-   For interactive way to configure both network and hostname, use `nmtui`
 
 ```bash
 # nmtui
 ```
 
--   Restart network service
+-   Restart NetworkManager service
 
 ```bash
-# systemctl restart network
+# systemctl restart NetworkManager
+```
+
+-   Verify the network configuration:
+
+```bash
+# nmcli
 ```
 
 -   Test the connection using `ping`
