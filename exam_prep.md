@@ -493,19 +493,20 @@ net.ipv4.ip_forward = 1
 
 ## Create a New Physical Partition
 
--   List the partition table
+-   List the partition table on `/dev/sdb`:
 
 ```bash
 # lsblk -fp
+# parted /dev/sdb print
 ```
 
--   Create partition label (`msdos` or `gpt`) on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write the changes using `w`]&#x3A;
+-   Create partition label (`msdos` or `gpt`) on `/dev/sdb` [use `m` for help in `fdisk` menu] + [always verify using `p` before writing it using `w`]
 
 ```bash
 # fdsik /dev/sdb
 ```
 
--   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to write the changes using `w`]
+-   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu] + [always verify using `p` before writing it using `w`]
 
 ```bash
 # fdisk /dev/sdb
@@ -540,6 +541,7 @@ net.ipv4.ip_forward = 1
 
 ```bash
 # lsblk -fp
+# parted /dev/sdb print
 ```
 
 -   Register the UUID into the fstab
@@ -554,7 +556,7 @@ net.ipv4.ip_forward = 1
 UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 ```
 
--   Alternatively we can use device name
+-   Or alternatively we can use device name
 
 ```bash
 /dev/sdb1 /my_mount ext4 defaults 0 0
@@ -581,13 +583,14 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 # free -m
 ```
 
--   List the partition table
+-   List the partition table on `/dev/sdb`:
 
 ```bash
 # lsblk -fp
+# parted /dev/sdb print
 ```
 
--   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to adjust the partition type to `linux-swap` using `t` and also to write the changes using `w`]
+-   Create a new partition on `/dev/sdb` [use `m` for help in `fdisk` menu, don't forget to adjust the partition type to `linux-swap` using `t`] + [always verify using `p` before writing it using `w`]
 
 ```bash
 # fdisk /dev/sdb
@@ -603,6 +606,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 
 ```bash
 # lsblk -fp
+# parted /dev/sdb print
 ```
 
 -   Format the new partition as swap:
@@ -622,6 +626,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 
 ```bash
 # lsblk -fp
+# parted /dev/sdb print
 ```
 
 -   Register the UUID into the fstab
@@ -645,5 +650,95 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Verify the new swap partition:
 
 ```bash
+# mount -a
 # free -m
+```
+
+## Creating Logical Volumes
+
+-   Create two physical partitions on `/dev/sdc` with the size of 500MB each. We can do it using `fdisk` but make sure to adjust the type to Linux LVM using `t` [always verify using `p` before writing it using `w`]&#x3A;
+
+```bash
+# fdisk /dev/sdc
+```
+
+-   Verify the partitions:
+
+```bash
+# lsblk -fp
+# parted /dev/sdc print
+```
+
+-   Register the new partition:
+
+```bash
+# udevadm settle
+```
+
+-   Include the two newly (`/dev/sdc1` and `/dev/sdc2`) created partitions as PV (Physical Volume):
+
+```bash
+# pvcreate /dev/sdc1 /dev/sdc2
+```
+
+-   Verify the PV:
+
+```bash
+# pvdisplay
+```
+
+-   Create a new VG (Volume Group) built from the two PV (`/dev/sdc1` and `/dev/sdc2`) and named it `vg01`:
+
+```bash
+# vgcreate vg01 /dev/sdc1 /dev/sdc2
+```
+
+-   Verify the VG:
+
+```bash
+# vgdisplay
+```
+
+-   Create a new LV (Logical Volume) from `/dev/vg01` with the size of 600MB and named it `lv01`:
+
+```bash
+# lvcreate -n lv01 -L 600M vg01
+```
+
+-   Verify the LV:
+
+```bash
+# lvdisplay
+```
+
+-   Format the newly created LV (`/dev/vg01/lv01`) with XFS as its file system:
+
+```bash
+# mkfs.xfs /dev/vg01/lv01
+```
+
+-   Create a mount point on `/logical_storage`:
+
+```bash
+# mkdir /logical_storage
+```
+
+-   Edit the `/etc/fstab` and add this line:
+
+```bash
+/dev/vg01/lv01  /logical_storage  xfs  defaults  0  0
+```
+
+-   Update `systemd` for the system to register the new `/etc/fstab` configuration:
+
+```bash
+# systemctl daemon-reload
+# mount -a
+```
+
+-   Verify the mount point
+
+```bash
+# lsblk -fp
+# df -h /logical_storage
 ```
