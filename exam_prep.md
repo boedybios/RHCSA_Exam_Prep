@@ -365,12 +365,10 @@ enabled = 1
 
 ## Activate and Start a Service
 
--   Enable, start, and restart GUI service
+-   Enable and start httpd service
 
 ```bash
-# systemctl enable graphical.target
-# systemctl start graphical.target
-# systemctl restart graphical.target
+# systemctl enable --now httpd
 ```
 
 ## Configure NTP
@@ -396,8 +394,7 @@ server time.example.com iburst
 -   Enable and start the service:
 
 ```bash
-# systemctl enable chronyd
-# systemctl start chronyd
+# systemctl enable --now chronyd
 ```
 
 -   Turn on the time syncronisation:
@@ -429,8 +426,7 @@ server time.example.com iburst
 -   Enable and start the service:
 
 ```bash
-# systemctl enable crond
-# systemctl start crond
+# systemctl enable --now crond
 ```
 
 -   Verify cron job for user tejo:
@@ -876,6 +872,12 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ```bash
 *	-rw,nfs4	my_server:/shares
+```
+
+-   Enable and start `autofs` service:
+
+```bash
+# systemctl enable --now autofs
 ```
 
 -   Verify:
