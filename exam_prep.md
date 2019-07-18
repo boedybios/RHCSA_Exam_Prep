@@ -859,7 +859,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Put this line:
 
 ```bash
-/remote_storage	/etc/auto.remote_storage
+/remote_storage  /etc/auto.remote_storage
 ```
 
 -   Create map file as defined in the `automounter` file:
@@ -871,7 +871,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Put this line:
 
 ```bash
-*	-rw,nfs4	my_server:/shares
+*  -rw,nfs4  my_server:/shares
 ```
 
 -   Enable and start `autofs` service:
