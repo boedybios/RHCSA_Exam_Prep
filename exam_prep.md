@@ -437,26 +437,6 @@ server time.example.com iburst
 # crontab -el tejo
 ```
 
-## Enable IP Forwarding
-
--   Configure `sysctl.conf`:
-
-```bash
-# vim /etc/sysctl.conf
-```
-
--   Add this line to the file:
-
-```bash
-net.ipv4.ip_forward = 1
-```
-
--   Reload the configuration file:
-
-```bash
-# sysctl -p
-```
-
 ## Create a Backup Archive File:
 
 -   Create backup directory `/tmp/my_backup`:
@@ -468,7 +448,7 @@ net.ipv4.ip_forward = 1
 -   Copy all the files within the system which are owned by user `tejo` to the backup directory:
 
 ```bash
-# find / -user tejo | xargs -I {} cp -r {} /tmp/my_backup
+# find / -user tejo -exec cp -rfp {} /tmp/my_backup \;
 ```
 
 -   Create an archive file named `tejo.backup.tar.gz` in root home directory as a backup for the backup directory
@@ -496,6 +476,26 @@ net.ipv4.ip_forward = 1
 ```bash
 # ls -l /root
 # cat /root/user.karti.txt
+```
+
+## Enable IP Forwarding
+
+-   Configure `sysctl.conf`:
+
+```bash
+# vim /etc/sysctl.conf
+```
+
+-   Add this line to the file:
+
+```bash
+net.ipv4.ip_forward = 1
+```
+
+-   Reload the configuration file:
+
+```bash
+# sysctl -p
 ```
 
 ## Start Cockpit Service
