@@ -30,7 +30,7 @@ rd.break
 # passwd
 ```
 
--   Ask SELinux to relabel the entire SELinux label:
+-   Ask `SELinux` to relabel the entire `SELinux` label:
 
 ```bash
 # touch /.autorelabel
@@ -77,7 +77,7 @@ rd.break
 # man yum.conf
 ```
 
--   Create and open a config file: 
+-   Create and open a new configuration file: 
 
 ```bash
 # vim /etc/yum.repos.d/REPO_NAME.repo
@@ -173,19 +173,19 @@ enabled = 1
 
 ## Configure Default Systemd Boot Target
 
--   Configure default systemd boot target to `multi-user`
+-   Configure default `systemd` boot target to `multi-user`
 
 ```bash
 # systemctl set-default multi-user.target
 ```
 
--   Configure default systemd boot target to `graphical`
+-   Configure default `systemd` boot target to `graphical`
 
 ```bash
 # systemctl set-default graphical.target
 ```
 
--   Verify systemd boot target:
+-   Verify `systemd` boot target:
 
 ```bash
 # systemctl get-default
@@ -193,19 +193,19 @@ enabled = 1
 
 ## Configure SELinux for Enforcing or Permissive Mode
 
--   Set SELinux mode to Enforcing:
+-   Set `SELinux` mode to Enforcing:
 
 ```bash
 # setenforce enforcing
 ```
 
--   Set SELinux mode to Permissive:
+-   Set `SELinux` mode to Permissive:
 
 ```bash
 # setenforce permissive
 ```
 
--   To make it permanent, make sure to configure the SELinux config file
+-   To make it permanent, make sure to configure the `SELinux` `config` file
 
 ```bash
 # vim /etc/selinux/config 
@@ -215,7 +215,7 @@ enabled = 1
 SELINUX = enforcing
 ```
 
--   Verify the SELinux Mode:
+-   Verify the `SELinux` Mode:
 
 ```bash
 # getenforce
@@ -244,7 +244,7 @@ SELINUX = enforcing
 # useradd karti
 ```
 
--   Create `wati` with userid 2992
+-   Create `wati` with `userid` 2992
 
 ```bash
 # useradd -u 2992 wati 
@@ -257,7 +257,7 @@ SELINUX = enforcing
 # usermod -aG siswa bejo
 ```
 
--   Verify users (pay attention on username, uid, and group):
+-   Verify users (pay attention on `username`, `uid`, and `group`):
 
 ```bash
 # id tejo
@@ -346,13 +346,13 @@ SELINUX = enforcing
 # setfacl -m g:badguys:--- /root/backup/fstab
 ```
 
--   Verify ACL of the file:
+-   Verify `ACL` of the file:
 
 ```bash
 # getfacl /root/backup/fstab
 ```
 
-## SSH
+## Configure SSH
 
 -   Create ssh key:
 
@@ -368,7 +368,7 @@ SELINUX = enforcing
 
 ## Activate and Start a Service
 
--   Enable and start httpd service
+-   Enable and start `httpd` service
 
 ```bash
 # systemctl enable --now httpd
@@ -406,7 +406,7 @@ server time.example.com iburst
 # timedatectl set-ntp yes
 ```
 
--   Verify the NTP:
+-   Verify the `NTP`:
 
 ```bash
 # chronyc sources -v
@@ -415,7 +415,7 @@ server time.example.com iburst
 
 ## Schedule a Job for a User
 
--   Register a job in crontab for user tejo
+-   Register a job in `crontab` for user `tejo`
 
 ```bash
 # crontab -eu tejo
@@ -432,7 +432,7 @@ server time.example.com iburst
 # systemctl enable --now crond
 ```
 
--   Verify cron job for user tejo:
+-   Verify `cron job` for user `tejo`:
 
 ```bash
 # crontab -el tejo
@@ -543,7 +543,7 @@ net.ipv4.ip_forward = 1
 # udevadm settle
 ```
 
--   Format the new partition using ext4:
+-   Format the new partition using `ext4`:
 
 ```bash
 # mkfs.ext4 /dev/sdb1
@@ -555,14 +555,14 @@ net.ipv4.ip_forward = 1
 # mkdir -p /my_mount
 ```
 
--   Get the UUID for the new partition
+-   Get the `UUID` for the new partition
 
 ```bash
 # lsblk -fp
 # parted /dev/sdb print
 ```
 
--   Register the UUID into the fstab
+-   Register the `UUID` into the `fstab`
 
 ```bash
 # vim /etc/fstab
@@ -640,14 +640,14 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 # swapon -a
 ```
 
--   Get the UUID for the new partition
+-   Get the `UUID` for the new partition
 
 ```bash
 # lsblk -fp
 # parted /dev/sdb print
 ```
 
--   Register the UUID into the fstab
+-   Register the `UUID` into the `fstab`
 
 ```bash
 # vim /etc/fstab
@@ -674,7 +674,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ## Creating Logical Volumes
 
--   Create two physical partitions on `/dev/sdc` with the size of 500MB each. We can do it using `fdisk` but make sure to adjust the type to Linux LVM using `t` [always verify using `p` before writing it using `w`]&#x3A;
+-   Create two physical partitions on `/dev/sdc` with the size of `500MB` each. We can do it using `fdisk` but make sure to adjust the type to `Linux LVM` using `t` [always verify using `p` before writing it using `w`]&#x3A;
 
 ```bash
 # fdisk /dev/sdc
@@ -699,37 +699,37 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # pvcreate /dev/sdc1 /dev/sdc2
 ```
 
--   Verify the PV:
+-   Verify the `PV`:
 
 ```bash
 # pvdisplay
 ```
 
--   Create a new VG (Volume Group) built from the two PV (`/dev/sdc1` and `/dev/sdc2`) and named it `vg01`:
+-   Create a new VG (Volume Group) built from the two `PV` (`/dev/sdc1` and `/dev/sdc2`) and named it `vg01`:
 
 ```bash
 # vgcreate vg01 /dev/sdc1 /dev/sdc2
 ```
 
--   Verify the VG:
+-   Verify the `VG`:
 
 ```bash
 # vgdisplay
 ```
 
--   Create a new LV (Logical Volume) from `/dev/vg01` with the size of 600MB and named it `lv01`:
+-   Create a new `LV` (Logical Volume) from `/dev/vg01` with the size of `600MB` and named it `lv01`:
 
 ```bash
 # lvcreate -n lv01 -L 600M vg01
 ```
 
--   Verify the LV:
+-   Verify the `LV`:
 
 ```bash
 # lvdisplay
 ```
 
--   Format the newly created LV (`/dev/vg01/lv01`) with XFS as its file system:
+-   Format the newly created `LV` (`/dev/vg01/lv01`) with `XFS` as its file system:
 
 ```bash
 # mkfs.xfs /dev/vg01/lv01
@@ -763,7 +763,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ## Extending Logical Volumes
 
--   Create a new physical partition from `/dev/sdc` with the size of 500MB. We can do it using `fdisk` but make sure to adjust the type to Linux LVM using `t` [always verify using `p` before writing it using `w`]&#x3A;
+-   Create a new physical partition from `/dev/sdc` with the size of `500MB`. We can do it using `fdisk` but make sure to adjust the type to `Linux LVM` using `t` [always verify using `p` before writing it using `w`]&#x3A;
 
 ```bash
 # fdisk /dev/sdc
@@ -782,19 +782,19 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # udevadm settle
 ```
 
--   Include the newly created partitions (`/dev/sdc3`)  as PV (Physical Volume):
+-   Include the newly created partitions (`/dev/sdc3`)  as `PV` (Physical Volume):
 
 ```bash
 # pvcreate /dev/sdc3
 ```
 
--   Verify the PV:
+-   Verify the `PV`:
 
 ```bash
 # pvdisplay
 ```
 
--   Extend the VG (`/dev/vg01`) using the new PV (`/dev/sdc3`):
+-   Extend the VG (`/dev/vg01`) using the new `PV` (`/dev/sdc3`):
 
 ```bash
 # vgextend /dev/vg01 /dev/sdc3
@@ -806,19 +806,19 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # vgdisplay
 ```
 
--   Extend the LV (`/dev/vg01/lv01`) to 1.1G:
+-   Extend the `LV` (`/dev/vg01/lv01`) to `1.1G`:
 
 ```bash
 # lvextend -L 1.1G /dev/vg01/lv01
 ```
 
--   Verify the LV:
+-   Verify the `LV`:
 
 ```bash
 # lvdisplay
 ```
 
--   Extend the XFS file system:
+-   Extend the `XFS` file system:
 
 ```bash
 # xfs_growfs /logical_storage
