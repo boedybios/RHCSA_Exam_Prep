@@ -506,7 +506,7 @@ net.ipv4.ip_forward = 1
 # system start cockpit.service
 ```
 
--   Open web browser and access the <http://servername:9090>
+-   Open web browser and access the `http://servername:9090`
 
 ## Create a New Physical Partition
 
@@ -860,22 +860,22 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # mkdir /remote_storage
 ```
 
--   Create `automounter` file with name `remote_storage` to access `/shares` from `myserver`:
+-   Create `automounter` file with name `mapper` to access `/shares` from `myserver`:
 
 ```bash
-# vim /etc/auto.master.d/remote_storage.autofs
+# vim /etc/auto.master.d/mapper.autofs
 ```
 
 -   Put this line:
 
 ```bash
-/remote_storage  /etc/auto.remote_storage
+/remote_storage  /etc/auto.mapper
 ```
 
 -   Create map file as defined in the `automounter` file:
 
 ```bash
-# vim /etc/auto.remote_storage
+# vim /etc/auto.mapper
 ```
 
 -   Put this line:
