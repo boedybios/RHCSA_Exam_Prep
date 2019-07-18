@@ -338,9 +338,11 @@ enabled = 1
 ```
 
 -   Group `badguys` cannot read or write the file:
+
 ```bash
 # setfacl -m g:badguys:--- /root/backup/fstab
 ```
+
 -   Verify ACL of the file:
 
 ```bash
@@ -456,8 +458,6 @@ net.ipv4.ip_forward = 1
 ```bash
 # sysctl -p
 ```
-
-
 
 ## Create a Backup Archive File:
 
@@ -752,7 +752,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ## Extending Logical Volumes
 
-- Create a new physical partition from `/dev/sdc` with the size of 500MB. We can do it using `fdisk` but make sure to adjust the type to Linux LVM using `t` [always verify using `p` before writing it using `w`]:
+-   Create a new physical partition from `/dev/sdc` with the size of 500MB. We can do it using `fdisk` but make sure to adjust the type to Linux LVM using `t` [always verify using `p` before writing it using `w`]&#x3A;
 
 ```bash
 # fdisk /dev/sdc
@@ -771,7 +771,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # udevadm settle
 ```
 
-- Include the newly created partitions (`/dev/sdc3`)  as PV (Physical Volume):
+-   Include the newly created partitions (`/dev/sdc3`)  as PV (Physical Volume):
 
 ```bash
 # pvcreate /dev/sdc3
@@ -783,32 +783,37 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # pvdisplay
 ```
 
-- Extend the VG (`/dev/vg01`) using the new PV (`/dev/sdc3`):
+-   Extend the VG (`/dev/vg01`) using the new PV (`/dev/sdc3`):
 
 ```bash
 # vgextend /dev/vg01 /dev/sdc3
 ```
 
-- Verify the VG:
+-   Verify the VG:
+
 ```bash
 # vgdisplay
 ```
 
-- Extend the LV (`/dev/vg01/lv01`) to 1.1G:
+-   Extend the LV (`/dev/vg01/lv01`) to 1.1G:
+
 ```bash
 # lvextend -L 1.1G /dev/vg01/lv01
 ```
 
-- Verify the LV:
+-   Verify the LV:
+
 ```bash
 # lvdisplay
 ```
-- Extend the XFS file system:
+
+-   Extend the XFS file system:
+
 ```bash
 # xfs_growfs /logical_storage
 ```
 
-- Verify the usable mount space:
+-   Verify the usable mount space:
 
 ```bash
 # df -h /logical_storage
@@ -820,20 +825,22 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ## Configure Autofs
 
-- Install `autofs` if it isn't installed:
+-   Install `autofs` if it isn't installed:
 
 ```bash
 # yum install autofs
 ```
 
-- Configure `autofs` to disable `nfs` with `udp`, `version 2`, and `version 3`:
+-   Configure `autofs` to disable `nfs` with `udp`, `version 2`, and `version 3`:
+
 ```bash
 # nfsconf --set nfsd udp n
 # nfsconf --set nfsd vers2 n
 # nfsconf --set nfsd vers3 n
 ```
 
-- Configure `autofs` to enable `nfs` version `4`, `4.0`, `4.1`, and `4.2`:
+-   Configure `autofs` to enable `nfs` version `4`, `4.0`, `4.1`, and `4.2`:
+
 ```bash
 # nfsconf --set nfsd vers4 y
 # nfsconf --set nfsd vers4.0 y
@@ -841,11 +848,38 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # nfsconf --set nfsd vers4.2 y
 ```
 
-- Create `automounter ` with name `remote_storage` to access `/shares` from `myserver`:
+-   Create mount point named `remote_storage`:
+
+```bash
+# mkdir /remote_storage
+```
+
+-   Create `automounter` file with name `remote_storage` to access `/shares` from `myserver`:
+
 ```bash
 # vim /etc/auto.master.d/remote_storage.autofs
 ```
-- Put this line:
-```bash
 
+-   Put this line:
+
+```bash
+/remote_storage	/etc/auto.remote_storage
+```
+
+-   Create map file as defined in the `automounter` file:
+
+```bash
+# vim /etc/auto.remote_storage
+```
+
+-   Put this line:
+
+```bash
+*	-rw,nfs4	my_server:/shares
+```
+
+-   Verify:
+
+```bash
+# ls -l /remote_storage
 ```
