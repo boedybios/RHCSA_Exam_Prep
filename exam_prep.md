@@ -815,10 +815,6 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # df -h /logical_storage
 ```
 
-## Stratis
-
-## VDO
-
 ## Configure Autofs
 
 -   Install `autofs` if it isn't installed:
