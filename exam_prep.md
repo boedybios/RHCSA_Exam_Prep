@@ -837,21 +837,17 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # yum install autofs
 ```
 
--   Configure `autofs` to disable `nfs` with `udp`, `version 2`, and `version 3`:
+-   Configure `autofs` to disable `nfs` with `udp` and `version 3`:
 
 ```bash
 # nfsconf --set nfsd udp n
-# nfsconf --set nfsd vers2 n
 # nfsconf --set nfsd vers3 n
 ```
 
--   Configure `autofs` to enable `nfs` version `4`, `4.0`, `4.1`, and `4.2`:
+-   Configure `autofs` to enable `nfs` version `4`:
 
 ```bash
 # nfsconf --set nfsd vers4 y
-# nfsconf --set nfsd vers4.0 y
-# nfsconf --set nfsd vers4.1 y
-# nfsconf --set nfsd vers4.2 y
 ```
 
 -   Create mount point named `remote_storage`:
