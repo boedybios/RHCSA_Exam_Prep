@@ -219,6 +219,7 @@ SELINUX = enforcing
 
 ```bash
 # getenforce
+# sestatus
 ```
 
 ## Create Users and Groups
