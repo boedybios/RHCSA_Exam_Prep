@@ -45,13 +45,13 @@ rd.break
 
 ## Configure Network and Hostname
 
--   For interactive way to configure both network and hostname, use `nmtui`
+-   For interactive way to configure both `network` and `hostname`, use `nmtui`
 
 ```bash
 # nmtui
 ```
 
--   Restart NetworkManager service
+-   Restart `NetworkManager` service
 
 ```bash
 # systemctl restart NetworkManager
@@ -67,56 +67,6 @@ rd.break
 
 ```bash
 # ping example.com
-```
-
-## Configure Default Systemd Boot Target
-
--   Configure default systemd boot target to `multi-user`
-
-```bash
-# systemctl set-default multi-user.target
-```
-
--   Configure default systemd boot target to `graphical`
-
-```bash
-# systemctl set-default graphical.target
-```
-
--   Verify systemd boot target:
-
-```bash
-# systemctl get-default
-```
-
-## Configure SELinux for Enforcing or Permissive Mode
-
--   Set SELinux mode to Enforcing:
-
-```bash
-# setenforce enforcing
-```
-
--   Set SELinux mode to Permissive:
-
-```bash
-# setenforce permissive
-```
-
--   To make it permanent, make sure to configure the SELinux config file
-
-```bash
-# vim /etc/selinux/config 
-```
-
-```bash
-SELINUX = enforcing
-```
-
--   Verify the SELinux Mode:
-
-```bash
-# getenforce
 ```
 
 ## Configure Yum Repository and Software Installation
@@ -197,6 +147,8 @@ enabled = 1
 ```
 
 ```bash
+# yum clean all
+# yum list all
 # yum repolist
 ```
 
@@ -217,6 +169,56 @@ enabled = 1
 
 ```bash
 # uname -rms
+```
+
+## Configure Default Systemd Boot Target
+
+-   Configure default systemd boot target to `multi-user`
+
+```bash
+# systemctl set-default multi-user.target
+```
+
+-   Configure default systemd boot target to `graphical`
+
+```bash
+# systemctl set-default graphical.target
+```
+
+-   Verify systemd boot target:
+
+```bash
+# systemctl get-default
+```
+
+## Configure SELinux for Enforcing or Permissive Mode
+
+-   Set SELinux mode to Enforcing:
+
+```bash
+# setenforce enforcing
+```
+
+-   Set SELinux mode to Permissive:
+
+```bash
+# setenforce permissive
+```
+
+-   To make it permanent, make sure to configure the SELinux config file
+
+```bash
+# vim /etc/selinux/config 
+```
+
+```bash
+SELINUX = enforcing
+```
+
+-   Verify the SELinux Mode:
+
+```bash
+# getenforce
 ```
 
 ## Create Users and Groups
@@ -457,10 +459,22 @@ net.ipv4.ip_forward = 1
 
 ## Create a Backup Archive File:
 
--   Create an archive file named `usr.local.tgz` in root home directory as a backup for `/usr/local/`
+-   Create backup directory `/tmp/my_backup`:
 
 ```bash
-# tar -cvzf /root/usr.local.tgz /usr/local
+# mkdir /tmp/my_backup
+```
+
+-   Copy all the files within the system which are owned by user `tejo` to the backup directory:
+
+```bash
+# find / -user tejo | xargs -I {} cp -r {} /tmp/my_backup
+```
+
+-   Create an archive file named `tejo.backup.tar.gz` in root home directory as a backup for the backup directory
+
+```bash
+# tar -cvzf /root/tejo.backup.tar.gz /tmp/my_backup
 ```
 
 -   Verify:
