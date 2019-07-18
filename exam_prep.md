@@ -309,6 +309,44 @@ enabled = 1
 # ls -ld /dir_bersama/kelompok_siswa
 ```
 
+## Configure File Access Control List (FACL)
+
+-   Backup `fstab` and use it as an example
+
+```bash
+# mkdir -p /root/backup/
+# cp /etc/fstab /root/backup/fstab
+# ls -l /root/backup/
+```
+
+-   User `tejo` can read and write the file:
+
+```bash
+# setfacl -m u:tejo:rw- /root/backup/fstab
+```
+
+-   User `bejo` cannot read or write the file:
+
+```bash
+# setfacl -m u:bejo:--- /root/backup/fstab
+```
+
+-   Other users can only read the file:
+
+```bash
+# chmod 744 /root/backup/fstab
+```
+
+-   Group `badguys` cannot read or write the file:
+```bash
+# setfacl -m g:badguys:--- /root/backup/fstab
+```
+-   Verify ACL of the file:
+
+```bash
+# getfacl /root/backup/fstab
+```
+
 ## SSH
 
 -   Create ssh key:
@@ -419,39 +457,7 @@ net.ipv4.ip_forward = 1
 # sysctl -p
 ```
 
-## Configure File Access Control List (FACL)
 
--   Backup `fstab` and use it as an example
-
-```bash
-# mkdir -p /root/backup/
-# cp /etc/fstab /root/backup/fstab
-# ls -l /root/backup/
-```
-
--   User `tejo` can read and write the file:
-
-```bash
-# setfacl -m u:tejo:rw- /root/backup/fstab
-```
-
--   User `bejo` cannot read or write the file:
-
-```bash
-# setfacl -m u:bejo:--- /root/backup/fstab
-```
-
--   Other users can only read the file:
-
-```bash
-# chmod 744 /root/backup/fstab
-```
-
--   Verify ACL of the file:
-
-```bash
-# getfacl /root/backup/fstab
-```
 
 ## Create a Backup Archive File:
 
@@ -479,6 +485,7 @@ net.ipv4.ip_forward = 1
 
 ```bash
 # ls -l /root
+# cat /root/user.karti.txt
 ```
 
 ## Start Cockpit Service
@@ -805,4 +812,40 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 
 ```bash
 # df -h /logical_storage
+```
+
+## Stratis
+
+## VDO
+
+## Configure Autofs
+
+- Install `autofs` if it isn't installed:
+
+```bash
+# yum install autofs
+```
+
+- Configure `autofs` to disable `nfs` with `udp`, `version 2`, and `version 3`:
+```bash
+# nfsconf --set nfsd udp n
+# nfsconf --set nfsd vers2 n
+# nfsconf --set nfsd vers3 n
+```
+
+- Configure `autofs` to enable `nfs` version `4`, `4.0`, `4.1`, and `4.2`:
+```bash
+# nfsconf --set nfsd vers4 y
+# nfsconf --set nfsd vers4.0 y
+# nfsconf --set nfsd vers4.1 y
+# nfsconf --set nfsd vers4.2 y
+```
+
+- Create `automounter ` with name `remote_storage` to access `/shares` from `myserver`:
+```bash
+# vim /etc/auto.master.d/remote_storage.autofs
+```
+- Put this line:
+```bash
+
 ```
