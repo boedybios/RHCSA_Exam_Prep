@@ -991,3 +991,52 @@ UUID=<uuid_for_vdo1> /my_vdo xfs defaults,x.systemd.requires=vdo.service 0 0
 # df -h /mnt_vdo
 # vdostats
 ```
+
+## Configure Stratis
+
+- Install `stratisd` and `stratis-cli` if they are not installed:
+
+```bash
+# yum install stratisd stratis-cli
+```
+
+- Enable and start `stratisd` service:
+
+```bash
+# systemctl enable --now stratisd
+```
+
+- Create `stratis pool` with name `my_pool` which contains two block devices: `/dev/sde` and `/dev/sdf`:
+
+```bash
+# stratis pool create my_pool /dev/sde /dev/sdf
+```
+
+- Verify the pool and its containing block devices:
+
+```bash
+# stratis pool list
+# stratis blockdev list my_pool
+```
+
+- Add another block device `/dev/sdg` to the pool:
+
+```bash
+# stratis pool add-data my_pool /dev/sdg
+```
+
+- Verify the pool and its containing block devices:
+
+```bash
+# stratis pool list
+# stratis blockdev list my_pool
+```
+
+- Create two file system from the pool [by default will use `xfs`]:
+
+```bash
+# stratis filesystem create my_pool stratisfs_1
+# stratis filesystem create my_pool stratisfs_2
+```
+
+- We can mount the file system using fstab
