@@ -134,13 +134,11 @@ gpgcheck = 0
 [kernelrepo]
 name = kernel repository
 baseurl = http://server.example.com/kernel_repo
-gpgcheck = 0
 enabled = 1
+gpgcheck = 0
 ```
 
 ```bash
-# yum clean all
-# yum list all
 # yum repolist
 ```
 
