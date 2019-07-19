@@ -702,7 +702,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Verify the new swap partition:
 
 ```bash
-# swapon -a
+# swapon -s
 # free -m
 ```
 
