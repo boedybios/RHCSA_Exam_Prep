@@ -727,7 +727,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 # udevadm settle
 ```
 
--   Include the two newly created partitions (`/dev/sdc1` and `/dev/sdc2`) as PV (Physical Volume):
+-   Include the two newly created partitions (`/dev/sdc1` and `/dev/sdc2`) as `PV` (Physical Volume):
 
 ```bash
 # pvcreate /dev/sdc1 /dev/sdc2
