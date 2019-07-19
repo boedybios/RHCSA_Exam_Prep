@@ -535,10 +535,10 @@ net.ipv4.ip_forward = 1
 
 ## Start Cockpit Service
 
--   Starting a cockpit service
+-   Enable and start a cockpit service
 
 ```bash
-# system start cockpit.service
+# systemctl enable --now cockpit.service
 ```
 
 -   Open web browser and access the `http://servername:9090`
