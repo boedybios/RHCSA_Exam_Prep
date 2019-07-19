@@ -222,6 +222,38 @@ SELINUX = enforcing
 # sestatus
 ```
 
+## SELinux Troubleshoot
+
+-   Find `sealert` log message:
+
+```bash
+# cat /var/log/message | grep sealert
+```
+
+-   Learn more from the `sealert` details:
+
+```bash
+# sealert -l <sealert_id>
+```
+
+-   Learn from audit message:
+
+```bash
+# ausearch -m AVC -ts recent
+```
+
+-   Adjust`SELinux` context using `semanage`:
+
+```bash
+# semanage fcontex -a -t <target_context> <adjustment>
+```
+
+-   Apply `SELinux` context:
+
+```bash
+# restorecon -R <target_files>
+```
+
 ## Create Users and Groups
 
 -   Create a group called `siswa`: 
