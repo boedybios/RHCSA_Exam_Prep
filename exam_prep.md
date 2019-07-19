@@ -183,13 +183,13 @@ gpgcheck = 0
 
 ## Configure SELinux for Enforcing or Permissive Mode
 
--   Set `SELinux` mode to Enforcing [warning: this one is not permanent]:
+-   Set `SELinux` mode to Enforcing [warning: this one is not permanent]&#x3A;
 
 ```bash
 # setenforce enforcing
 ```
 
--   Set `SELinux` mode to Permissive [warning: this one is not permanent]:
+-   Set `SELinux` mode to Permissive [warning: this one is not permanent]&#x3A;
 
 ```bash
 # setenforce permissive
@@ -322,7 +322,7 @@ SELINUX = enforcing
 # chgrp siswa /dir_bersama/kelompok_siswa
 ```
 
--   The shared directory should be readable, writable, and accessible to the member of `siswa` only [make it applied for the future as well, therefore we need g+s]:
+-   The shared directory should be readable, writable, and accessible to the member of `siswa` only [make it applied for the future as well, therefore we need g+s]&#x3A;
 
 ```bash
 # chmod 2770 /dir_bersama/kelompok_siswa
@@ -369,9 +369,11 @@ SELINUX = enforcing
 ```
 
 -   By default, group `goodguys` can access directory `/root/backup/` and read the files within the directory:
+
 ```bash
 # setfacl -Rm d:g:goodguys:r-X /root/backup/
 ```
+
 -   Verify `ACL` of the file:
 
 ```bash
@@ -392,7 +394,7 @@ SELINUX = enforcing
 # ssh-copy-id user@myserver
 ```
 
-- Verify by login to the target server:
+-   Verify by login to the target server:
 
 ```bash
 # ssh myserver
@@ -472,7 +474,7 @@ server time.example.com iburst
 
 ## Create a Backup Archive File:
 
--   Create backup directory `/tmp/my_backup`:
+-   Create a backup directory `/tmp/my_backup`:
 
 ```bash
 # mkdir /tmp/my_backup
@@ -498,7 +500,7 @@ server time.example.com iburst
 
 ## Extract a Line from a File with String Matching
 
--   Extract a live in `/etc/passwd` contains `karti` and stores it in a file `/root/user.karti.txt`
+-   Extract a live in `/etc/passwd` contains `karti` and stores it into a file `/root/user.karti.txt`
 
 ```bash
 # cat /etc/passwd | grep karti > /root/user.karti.txt
