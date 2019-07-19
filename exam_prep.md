@@ -1,4 +1,4 @@
-# RHCSA Exam Preparation
+# RHCSA (RHEL 8) Exam Preparation
 
 ## Reset Root Password -> Super Important
 
