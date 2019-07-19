@@ -989,4 +989,5 @@ UUID=<uuid_for_vdo1> /my_vdo xfs defaults,x.systemd.requires=vdo.service 0 0
 ```bash
 # lsblk -fp
 # df -h /mnt_vdo
+# vdostats
 ```
