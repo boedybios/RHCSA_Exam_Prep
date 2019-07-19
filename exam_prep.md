@@ -368,6 +368,10 @@ SELINUX = enforcing
 # setfacl -m g:badguys:--- /root/backup/fstab
 ```
 
+-   By default, group `goodguys` can access directory `/root/backup/` and read the files within the directory:
+```bash
+# setfacl -Rm d:g:goodguys:r-X /root/backup/
+```
 -   Verify `ACL` of the file:
 
 ```bash
