@@ -406,9 +406,9 @@ SELINUX = enforcing
 # systemctl enable --now httpd
 ```
 
-## Configure NTP
+## Configure NTP (Network Time Protocol)
 
--   Install chrony
+-   Install `chrony` if not installed: 
 
 ```bash
 # yum install chrony
