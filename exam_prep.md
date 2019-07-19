@@ -378,18 +378,24 @@ SELINUX = enforcing
 # getfacl /root/backup/fstab
 ```
 
-## Configure SSH
+## Configure SSH Key
 
--   Create ssh key:
+-   Generate `ssh key`:
 
 ```bash
 # ssh-keygen
 ```
 
--   copy ssh key
+-   Copy `ssh key` to target server:
 
 ```bash
-# ssh-copy-id user@server
+# ssh-copy-id user@myserver
+```
+
+- Verify by login to the target server:
+
+```bash
+# ssh myserver
 ```
 
 ## Activate and Start a Service
