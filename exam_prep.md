@@ -580,7 +580,7 @@ net.ipv4.ip_forward = 1
 -   Format the new partition using `ext4`:
 
 ```bash
-# mkfs.ext4 /dev/sdb1
+# mkfs.ext4 -L volume_label /dev/sdb1
 ```
 
 -   Create a directory for mounting point
@@ -664,7 +664,7 @@ UUID=<uuid_for_sdb1> /my_mount ext4 defaults 0 0
 -   Format the new partition as swap:
 
 ```bash
-# mkswap /dev/sdb2
+# mkswap -L swap_label /dev/sdb2
 ```
 
 -   Activate the new swap partition:
@@ -766,7 +766,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Format the newly created `LV` (`/dev/vg01/lv01`) with `XFS` as its file system:
 
 ```bash
-# mkfs.xfs /dev/vg01/lv01
+# mkfs.xfs -L volume_label /dev/vg01/lv01
 ```
 
 -   Create a mount point on `/logical_storage`:
