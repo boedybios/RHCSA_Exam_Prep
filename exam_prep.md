@@ -322,7 +322,7 @@ SELINUX = enforcing
 # chgrp siswa /dir_bersama/kelompok_siswa
 ```
 
--   The shared directory should be readable, writable, and accessible to the member of `siswa` only:
+-   The shared directory should be readable, writable, and accessible to the member of `siswa` only [make it applied for the future as well, therefore we need g+s]:
 
 ```bash
 # chmod 2770 /dir_bersama/kelompok_siswa
