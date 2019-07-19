@@ -71,12 +71,6 @@ rd.break
 
 ## Configure Yum Repository and Software Installation
 
--   Need a help? Find `/Example:`
-
-```bash
-# man yum.conf
-```
-
 -   Create and open a new configuration file: 
 
 ```bash
@@ -87,8 +81,8 @@ rd.break
 [myrepoid]
 name = Name of this repo
 baseurl = http://server.example.com/repo
-gpgcheck = 0
 enabled = 1
+gpgcheck = 0
 ```
 
 -   Alternatively we can use `yum-config-manager`:
@@ -100,8 +94,6 @@ enabled = 1
 -   Verify the repository configuration:
 
 ```bash
-# yum clean all
-# yum list all
 # yum repolist
 ```
 
