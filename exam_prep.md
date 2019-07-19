@@ -926,3 +926,67 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 ```bash
 # ls -l /remote_storage
 ```
+
+## Configure VDO (Virtual Data Optimiser)
+
+-   Create a `vdo` volume of device `/dev/sdd` with logical size of `50GB` and name it `vd1`:
+
+```bash
+# vdo create --name=vdo1 --device=/dev/sdd --vdoLogicalSize=50G
+```
+
+-   Verify the newly created `vdo`:
+
+```bash
+# vdo list
+```
+
+-   Format `vdo1` with `xfs`:
+
+```bash
+# mkfs.xfs -K /dev/mapper/vdo1
+```
+
+-   Register the new partition:
+
+```bash
+# udevadm settle
+```
+
+-   Create mount point `/my_vdo`  for `vdo1`:
+
+```bash
+# mkdir /my_vdo
+```
+
+-   Get the `UUID` for the new partition
+
+```bash
+# lsblk /dev/mapper/vdo1
+```
+
+-   Register the `UUID` into the `fstab`
+
+```bash
+# vim /etc/fstab
+```
+
+-   Add this line:
+
+```bash
+UUID=<uuid_for_vdo1> /my_vdo xfs defaults,x.systemd.requires=vdo.service 0 0
+```
+
+-   Update `systemd` for the system to register the new `/etc/fstab` configuration:
+
+```bash
+# systemctl daemon-reload
+# mount -a
+```
+
+-   Verify the mount point
+
+```bash
+# lsblk -fp
+# df -h /mnt_vdo
+```
