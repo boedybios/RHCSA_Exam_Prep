@@ -912,7 +912,7 @@ UUID=<uuid_for_sdb2> swap swap defaults 0 0
 -   Put this line:
 
 ```bash
-*  -rw,nfs4  my_server:/shares/&
+*  -rw,sync,fstype=nfs4  my_server:/shares/&
 ```
 
 -   Enable and start `autofs` service:
