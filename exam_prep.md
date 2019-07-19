@@ -183,13 +183,13 @@ gpgcheck = 0
 
 ## Configure SELinux for Enforcing or Permissive Mode
 
--   Set `SELinux` mode to Enforcing:
+-   Set `SELinux` mode to Enforcing [warning: this one is not permanent]:
 
 ```bash
 # setenforce enforcing
 ```
 
--   Set `SELinux` mode to Permissive:
+-   Set `SELinux` mode to Permissive [warning: this one is not permanent]:
 
 ```bash
 # setenforce permissive
