@@ -1039,4 +1039,24 @@ UUID=<uuid_for_vdo1> /my_vdo xfs defaults,x.systemd.requires=vdo.service 0 0
 # stratis filesystem create my_pool stratisfs_2
 ```
 
-- We can mount the file system using fstab
+- Prepare mount point `/mnt/my_stratis_1` and `/mnt/my_stratis_2`:
+
+```bash
+# mkdir /mnt/my_stratis_1
+# mkdir /mnt/my_stratis_2
+```
+
+- Add this line in the `/etc/fstab`:
+
+```bash
+/stratis/my_pool/stratisfs_1  /mnt/my_stratis_1  xfs  defaults,x.systemd.requires=stratisd.service  0  0
+
+/stratis/my_pool/stratisfs_2  /mnt/my_stratis_2  xfs  defaults,x.systemd.requires=stratisd.service  0  0
+```
+
+- Mount the file system
+
+```bash
+# systemctl daemon-reload
+# mount -a
+```
