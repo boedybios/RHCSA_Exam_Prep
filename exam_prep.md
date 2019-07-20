@@ -994,59 +994,59 @@ UUID=<uuid_for_vdo1> /my_vdo xfs defaults,x.systemd.requires=vdo.service 0 0
 
 ## Configure Stratis
 
-- Install `stratisd` and `stratis-cli` if they are not installed:
+-   Install `stratisd` and `stratis-cli` if they are not installed:
 
 ```bash
 # yum install stratisd stratis-cli
 ```
 
-- Enable and start `stratisd` service:
+-   Enable and start `stratisd` service:
 
 ```bash
 # systemctl enable --now stratisd
 ```
 
-- Create `stratis pool` with name `my_pool` which contains two block devices: `/dev/sde` and `/dev/sdf`:
+-   Create `stratis pool` with name `my_pool` which contains two block devices: `/dev/sde` and `/dev/sdf`:
 
 ```bash
 # stratis pool create my_pool /dev/sde /dev/sdf
 ```
 
-- Verify the pool and its containing block devices:
+-   Verify the pool and its containing block devices:
 
 ```bash
 # stratis pool list
 # stratis blockdev list my_pool
 ```
 
-- Add another block device `/dev/sdg` to the pool:
+-   Add another block device `/dev/sdg` to the pool:
 
 ```bash
 # stratis pool add-data my_pool /dev/sdg
 ```
 
-- Verify the pool and its containing block devices:
+-   Verify the pool and its containing block devices:
 
 ```bash
 # stratis pool list
 # stratis blockdev list my_pool
 ```
 
-- Create two file system from the pool [by default will use `xfs`]:
+-   Create two file system from the pool [by default will use `xfs`]&#x3A;
 
 ```bash
 # stratis filesystem create my_pool stratisfs_1
 # stratis filesystem create my_pool stratisfs_2
 ```
 
-- Prepare mount point `/mnt/my_stratis_1` and `/mnt/my_stratis_2`:
+-   Prepare mount point `/mnt/my_stratis_1` and `/mnt/my_stratis_2`:
 
 ```bash
 # mkdir /mnt/my_stratis_1
 # mkdir /mnt/my_stratis_2
 ```
 
-- Add this line in the `/etc/fstab`:
+-   Add this line in the `/etc/fstab`:
 
 ```bash
 /stratis/my_pool/stratisfs_1  /mnt/my_stratis_1  xfs  defaults,x.systemd.requires=stratisd.service  0  0
@@ -1054,7 +1054,7 @@ UUID=<uuid_for_vdo1> /my_vdo xfs defaults,x.systemd.requires=vdo.service 0 0
 /stratis/my_pool/stratisfs_2  /mnt/my_stratis_2  xfs  defaults,x.systemd.requires=stratisd.service  0  0
 ```
 
-- Mount the file system
+-   Mount the file system
 
 ```bash
 # systemctl daemon-reload
